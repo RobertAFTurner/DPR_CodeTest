@@ -1,3 +1,4 @@
+using DPR_CodeTest.Calculators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,21 @@ namespace DPR_CodeTest
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            while (true)
+            {
+                Console.WriteLine("Hello! Please enter your bank balance to see your interest rate: ");
+                var input = Console.ReadLine();
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+                decimal parsedInput = 0.00m;
+
+                if (decimal.TryParse(input, out parsedInput))
+                {
+                    var calculator = new InterestCalculator();
+                    var interest = calculator.Calculate(parsedInput);
+                   
+                    Console.WriteLine($"Thank you. Your calculated interest is {string.Format("{0:C}", interest)}");
+                }
+            }
         }
     }
 }
